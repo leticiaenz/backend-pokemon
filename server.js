@@ -10,6 +10,8 @@ initDB();
 
 const app = new koa();
 
+app.use(cors());
+
 app.use(
   mount(
     "/graphql",

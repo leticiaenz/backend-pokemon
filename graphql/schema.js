@@ -3,7 +3,8 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLID
 } = require("graphql");
 
 const pokemonGraphType = require("./PokemonType");
@@ -17,7 +18,7 @@ const RootQuery = new GraphQLObjectType({
       type: pokemonGraphType,
       args: { id: { type: GraphQLString } },
       resolve(parent, args) {
-        return Pokemon.findById({ id: args.id });
+        return Pokemon.findById(args.id);
       }
     },
     pokemons: {
