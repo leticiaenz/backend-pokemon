@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const initDB = () => {
   mongoose.connect(
-    "mongodb+srv://leticiaenz:Devs2019@@cluster0-ohsut.mongodb.net/leticia-pokemon",
+    "mongodb://localhost/leticia-pokemon",
     { useNewUrlParser: true }
   );
 

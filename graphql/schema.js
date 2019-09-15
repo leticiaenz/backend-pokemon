@@ -2,28 +2,29 @@ const {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLList
+  GraphQLList,
+  GraphQLInt
 } = require("graphql");
 
 const pokemonGraphType = require("./PokemonType");
 const Pokemon = require("../models/pokemons");
-const Mutations = require("./mutations");
+const Mutation = require("./mutations");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     pokemon: {
       type: pokemonGraphType,
-      args: { name: { type: GraphQLString } },
+      args: { id: { type: GraphQLString } },
       resolve(parent, args) {
-        return Pokemon.findOne({ name: args.name });
+        return Pokemon.findById({ id: args.id });
       }
     },
     pokemons: {
       type: new GraphQLList(pokemonGraphType),
-      args: {},
+      args: { first: { type: GraphQLInt } },
       resolve(parent, args) {
-        return Pokemon.find();
+        return Pokemon.find().limit(args.first);
       }
     }
   }
@@ -31,5 +32,5 @@ const RootQuery = new GraphQLObjectType({
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
-  mutation: Mutations
+  mutation: Mutation
 });
