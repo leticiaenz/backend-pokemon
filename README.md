@@ -1,3 +1,3 @@
-# Backend-Ookemon
+# Backend-Pokemon
 
 Project backend pokemon graphql
